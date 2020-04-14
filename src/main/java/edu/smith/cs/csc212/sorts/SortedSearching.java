@@ -28,20 +28,40 @@ public class SortedSearching {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * Find an integer in the sorted list dataset by iterative binary search.
 	 * 
 	 * HINT: Try a while loop.
-     *
+	 *
 	 * @param findMe - the integer you're looking for!
 	 * @param dataset - the list you're searching!
 	 * @return -1 if not found or the position if found.
 	 */
 	public static int binarySearchIterative(int findMe, ListADT<Integer> dataset) {
-		throw new TODOErr();
-	}
 
+		int left = 0;
+		int right = dataset.size();
+		int middle = (left + right) / 2;
+
+		while(middle != right && middle != left) {
+
+			if (middle > findMe) {
+				right = middle;
+				middle = (left + right) / 2;
+			}
+
+			if (middle < findMe) {
+				left = middle;
+				middle = (left + right) / 2;
+			}
+			
+			if(middle == findMe) {
+				return dataset.getIndex(middle);
+			}
+		}
+		return -1;	
+	}
 	/**
 	 * Find an integer in the sorted list dataset by recursive binary search.
 	 * 
@@ -54,10 +74,10 @@ public class SortedSearching {
 	private static int binarySearchR(int findMe, ListADT<Integer> dataset, int left, int right) {
 		throw new TODOErr();
 	}
-	
+
 	/**
 	 * Find an integer in the sorted list dataset by recursive binary search.
-     *
+	 *
 	 * @param findMe - the integer you're looking for!
 	 * @param dataset - the list you're searching!
 	 * @return -1 if not found or the position if found.
