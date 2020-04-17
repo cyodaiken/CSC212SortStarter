@@ -13,9 +13,13 @@ public class SlowSorts {
 	 * @return true if they are sorted, false if not.
 	 */
 	public static boolean isSorted(ListADT<Integer> data) {
-		throw new TODOErr();
+		for (int i = 0; i < data.size()-1; i++) {
+			if(data.getIndex(i) > data.getIndex(i+1)) {
+				return false;
+			}
+		}
+		return true;
 	}
-
 
 	/**
 	 * Insert the value x in to the sorted list "target" in the correct position.
@@ -25,7 +29,23 @@ public class SlowSorts {
 	 * @param target - the sorted list to modify (might be empty!)
 	 */
 	public static void insertSorted(int x, ListADT<Integer> target) {
-		throw new TODOErr();
+
+		if (target.size() == 0) {
+			target.addBack(x);
+			return;
+		}
+
+		if (target.getIndex(target.size()- 1) <= x) {
+			target.addBack(x);
+			return;
+		}
+
+		for (int i = 0; i < target.size(); i++) {
+			if((target.getIndex(i) >= x )) {
+				target.addIndex(i, x);
+				return;
+			}
+		}			
 	}
 
 	/**
@@ -39,11 +59,19 @@ public class SlowSorts {
 	public static int findMinPosition(ListADT<Integer> list, int start) {
 		assert (start < list.size()) : "There should be stuff in the list to the right of start!";
 
-		throw new TODOErr();
+		int minPos = start;
+
+		for (int i = start; i < list.size(); i++) {
+			if(list.getIndex(minPos) > list.getIndex(i)) {
+				minPos = i;
+			}
+		}
+
+		return minPos;
 	}
 
 	/**
-	 * InsertionSort: Create a new output list that contians all elements of input
+	 * InsertionSort: Create a new output list that contains all elements of input
 	 * but in sorted order. This is very short if you call {@link #insertSorted}.
 	 * 
 	 * @param input - the list to sort.
@@ -51,7 +79,11 @@ public class SlowSorts {
 	 */
 	public static ListADT<Integer> insertionSort(ListADT<Integer> input) {
 		ListADT<Integer> output = new JavaList<>();
-		throw new TODOErr();
+
+		for (int i = 0; i < input.size(); i++) {
+			insertSorted(input.getIndex(i), output);
+		}
+		return output;
 	}
 
 	/**
@@ -65,7 +97,10 @@ public class SlowSorts {
 	 *              in-place.
 	 */
 	public static void selectionSort(ListADT<Integer> fixMe) {
-		throw new TODOErr();
-	}
 
+		for (int i = 0; i < fixMe.size(); i++) { 
+			int j = findMinPosition(fixMe, i);
+			fixMe.swap(j, i); 	
+		}
+	}
 }

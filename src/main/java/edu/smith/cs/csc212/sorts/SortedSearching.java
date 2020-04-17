@@ -55,7 +55,7 @@ public class SortedSearching {
 				left = middle;
 				middle = (left + right) / 2;
 			}
-			
+
 			if(middle == findMe) {
 				return dataset.getIndex(middle);
 			}
@@ -72,7 +72,24 @@ public class SortedSearching {
 	 * @return -1 if not found, or the index of findMe in dataset.
 	 */
 	private static int binarySearchR(int findMe, ListADT<Integer> dataset, int left, int right) {
-		throw new TODOErr();
+
+		if (right - left == 1) {
+			if (dataset.getIndex(left) == findMe) {
+				return dataset.getIndex(left);
+			} 
+			return -1;
+
+		} else if (right - left > 1){
+			int middle = (left + right) / 2;
+			if (dataset.getIndex(middle) == findMe) {
+				return middle;
+			} else if (dataset.getIndex(middle) < findMe) {
+				return binarySearchR(findMe, dataset, middle + 1, right);	
+			} else {
+				return binarySearchR(findMe, dataset, left, middle);
+			}
+		}
+		return -1;
 	}
 
 	/**

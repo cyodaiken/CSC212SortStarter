@@ -51,7 +51,7 @@ public class SortedSearchingTest {
 			assertEquals("Item " + i + " should be at position " + i, i,
 					SortedSearching.binarySearchRecursive(i, data));
 		}
-
+		
 		assertEquals(-1, SortedSearching.binarySearchRecursive(-100, data));
 		assertEquals(-1, SortedSearching.binarySearchRecursive(1000, data));
 	}
