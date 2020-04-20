@@ -30,22 +30,52 @@ public class SlowSorts {
 	 */
 	public static void insertSorted(int x, ListADT<Integer> target) {
 
-		if (target.size() == 0) {
-			target.addBack(x);
-			return;
+		int left = 0; 
+		int right = target.size();
+
+		int mid = (left + right)/ 2;
+
+		if (target.size() == 0) { 
+			target.addBack(x); 
+			return; 
 		}
 
-		if (target.getIndex(target.size()- 1) <= x) {
-			target.addBack(x);
-			return;
+		if (target.getIndex(target.size()- 1) <= x) { 
+			target.addBack(x); 
+			return; 
 		}
 
-		for (int i = 0; i < target.size(); i++) {
-			if((target.getIndex(i) >= x )) {
-				target.addIndex(i, x);
-				return;
+		while(right - left > 1) {
+
+			if(target.getIndex(mid) == x) { 
+				target.addIndex(mid, x); 
+				return; 
 			}
-		}			
+
+			else if (target.getIndex(mid) < x) {
+
+				left = mid; 
+				mid = (left + right)/2;
+
+			} else {
+
+				right = mid; 
+				mid = (left + right)/2; } 
+		}
+
+		if(target.getIndex(mid) < x) { 
+			target.addIndex(left+1, x);
+
+		} else {
+
+			target.addIndex(left, x); 
+		}
+
+
+		/*
+		 * for (int i = 0; i < target.size(); i++) { if((target.getIndex(i) >= x )) {
+		 * target.addIndex(i, x); return; } }
+		 */			
 	}
 
 	/**
